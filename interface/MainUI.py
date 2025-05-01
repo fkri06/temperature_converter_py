@@ -36,8 +36,14 @@ class TemperatureConverterInterface:
         self.input_value = Entry()
         self.input_value.grid(sticky="w", row=4, column=0, pady=35)
 
-        self.button = Button(text="Convert", command=self.calculate, width=10)
+        self.button = Button(text="Convert", command=self.calculate, width=10, font=("Arial", 12, "bold"), fg="#36454F")
         self.button.grid(sticky="w", row=5, column=0)
+
+
+        # Label to show the converted value
+        self.show_converted_value = Label(text="Text", font=("Arial", 24, "bold"))
+        self.show_converted_value.grid(sticky="w", row=4, column=1)
+
 
         self.window.mainloop()
     
