@@ -1,40 +1,48 @@
 from tkinter import *
 from tkinter import messagebox
+from enum import Enum
+from converter.converter import *
+
+class Temp(Enum):
+    CELCIUS     = 1
+    FAHRENHEIT  = 2
+    KELVIN      = 3
 
 class TemperatureConverterInterface:
 
     def __init__(self):
-        window = Tk()
-        window.title("Temperature Converter")
-        window.minsize(width=640, height=350)
-        window.config(padx=20, pady=20)
-
+        self.window = Tk()
+        self.window.title("Temperature Converter")
+        self.window.minsize(width=640, height=350)
+        self.window.config(padx=20, pady=20)
+        
         # Labels
-        app_label = Label(window, text="Convert Temperature", font=("Times New Roman", 24, "bold"))
-        app_label.grid(sticky="w", row=0, column=0)
-        app_label.config(pady=10, padx=10)
+        self.app_label = Label(self.window, text="Convert Temperature", font=("Times New Roman", 24, "bold"))
+        self.app_label.grid(sticky="w", row=0, column=0)
+        self.app_label.config(pady=10, padx=10)
 
-        from_temperature_label = Label(window, text="From", font=("Arial", 14, "normal"))
-        from_temperature_label.grid(sticky="w", row=1, column=0)
+        self.from_temperature_label = Label(self.window, text="From", font=("Arial", 14, "normal"))
+        self.from_temperature_label.grid(sticky="w", row=1, column=0)
 
         # Drop down menu
-        self.first_choice = DropDownMenu(window, 2, 0, 1) 
+        self.first_choice = DropDownMenu(self.window, 2, 0, 1) 
 
-        to_temperature_label = Label(window, text="To", font=("Arial", 14, "normal"))
-        to_temperature_label.grid(sticky="w", row=1, column=1)
+        self.to_temperature_label = Label(self.window, text="To", font=("Arial", 14, "normal"))
+        self.to_temperature_label.grid(sticky="w", row=1, column=1)
 
-        self.second_choice = DropDownMenu(window, 2, 1, 2)
+        self.second_choice = DropDownMenu(self.window, 2, 1, 2)
 
         # Input entry and button
+        self.input_value = Entry()
+        self.input_value.grid(sticky="w", row=4, column=0, pady=35)
 
-        input_value = Entry()
-        input_value.grid(sticky="w", row=4, column=0, pady=35)
-        input_value.insert(END, "Input the value here...")
+        self.button = Button(text="Convert", command=self.calculate, width=10)
+        self.button.grid(sticky="w", row=5, column=0)
 
-        button = Button(text="Convert", command=self.show_value, width=10)
-        button.grid(sticky="w", row=5, column=0)
-
-        window.mainloop()
+        self.window.mainloop()
+    
+    def calculate(self):
+        pass
         
 class DropDownMenu:
     def __init__(self, window: Tk, row: int, column: int, rowspan: int):
