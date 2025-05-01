@@ -48,7 +48,45 @@ class TemperatureConverterInterface:
         self.window.mainloop()
     
     def calculate(self):
-        pass
+
+        converted_value = None
+
+        try:
+            value_to_convert = int(self.input_value.get())
+        except ValueError:
+            messagebox.showwarning(title="Input error", message="You must input number.")
+            return
+        
+        try:
+            first_choice_value = Temp[str(self.first_choice.value.upper())].value
+            second_choice_value = Temp[str(self.second_choice.value.upper())].value
+        except:
+            messagebox.showwarning(title="Input error", message="You must select the temperature.")
+            return
+        
+        if first_choice_value == 1 and second_choice_value == 2:
+            converted_value = celcius_to_fahrenheit(value_to_convert)
+        
+        elif first_choice_value == 1 and second_choice_value == 3:
+            converted_value = celcius_to_kelvin(value_to_convert)
+        
+        elif first_choice_value == 2 and second_choice_value == 1:
+            converted_value = fahrenheit_to_celcius(value_to_convert)
+
+        elif first_choice_value == 2 and second_choice_value == 3:
+            converted_value = fahrenheit_to_kelvin(value_to_convert)
+        
+        elif first_choice_value == 3 and second_choice_value == 1:
+            converted_value = kelvin_to_celcius(value_to_convert)
+        
+        elif first_choice_value == 3 and second_choice_value == 2:
+            converted_value = kelvin_to_fahrenheit(value_to_convert)
+
+        if converted_value is None:
+            converted_value = value_to_convert
+
+        self.show_converted_value.config(text=f'{round(converted_value, 2)}')
+        
         
 class DropDownMenu:
     def __init__(self, window: Tk, row: int, column: int, rowspan: int):
