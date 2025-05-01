@@ -1,5 +1,4 @@
 from tkinter import *
-from constants import Constants
 
 class TemperatureConverterInterface:
 
