@@ -1,3 +1,6 @@
+def celcius_to_fahrenheit(value):
+    return value * (9 / 5) + 32
+
 def celcius_to_kelvin(value):
     return value + 273.15
 
